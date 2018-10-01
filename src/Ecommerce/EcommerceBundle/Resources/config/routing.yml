@@ -1,0 +1,52 @@
+produits:
+    pattern:  /
+    defaults: { _controller: EcommerceBundle:Produits:produits }
+
+presentation:
+    pattern:  /produit/presentation{id}
+    defaults: { _controller: EcommerceBundle:Produits:presentation }
+
+panier:
+    pattern:  /panier
+    defaults: { _controller: EcommerceBundle:Panier:panier }
+
+
+supprimer:
+    pattern:  /supprimer/{id}
+    defaults: { _controller: EcommerceBundle:Panier:supprimer }
+
+
+ajouter:
+    pattern:  /ajouter/{id}
+    defaults: { _controller: EcommerceBundle:Panier:ajouter }
+
+
+
+livraison:
+    pattern:  /panier/livraison
+    defaults: { _controller: EcommerceBundle:Panier:livraison }
+
+validation:
+    pattern:  /panier/validation
+    defaults: { _controller: EcommerceBundle:Panier:validation }
+
+categorieProduits:
+    pattern: /categorie/{categorie}
+    defaults: { _controller: EcommerceBundle:Produits:produits }
+
+rechercheProduits:
+    pattern: /recherche
+    defaults: { _controller: EcommerceBundle:Produits:rechercheTraitement }
+
+easy_admin_bundle:
+    resource: "@EasyAdminBundle/Controller/AdminController.php"
+    type:     annotation
+    prefix:   /admin
+
+livraisonAdresseSuppression:
+    pattern: /livraison/adresse/suppression/{id}
+    defaults: { _controller: EcommerceBundle:Panier:adresseSuppression }
+
+validationCommande:
+    pattern: /api/banque/{id}
+    defaults: { _controller: EcommerceBundle:Commandes:validationCommande }

@@ -1,0 +1,76 @@
+{% extends "::layout/layout.html.twig" %}
+
+{% block body %}
+    <div class="container">
+
+    <div class="row">
+
+
+            <div class="span12">
+                <h2>Livraison</h2>
+                <div id="collapseOne" class="accordion-body collapse in">
+                    <div class="accordion-inner">
+                        <div class="span3">
+                            {% include '::modulesUser/navigation.html.twig' %}
+
+                            {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                                {% include 'UtilisateursBundle:Default:modulesUsed/UtilisateursConnecte.html.twig' %}
+                            {% else %}
+                                {% include 'UtilisateursBundle:Default:modulesUsed/Utilisateurs.html.twig' %}
+                            {% endif %}
+                            {% render(controller('EcommerceBundle:Panier:menu')) %}
+
+
+                        </div>
+                        <div class="span4">
+                            {% if( utilisateur.adresses|length != 0) %}
+
+
+                            <form action="{{ path('validation') }}" method="post">
+                                <h4>Adresse de livraison</h4>
+                                {% for adresse in utilisateur.adresses %}
+                                    <label class="radio">
+                                    <input type="radio" name="livraison"  value="{{ adresse.id }}" {% if loop.index0 == 0 %} checked="checked" {% endif %}>
+                                   <b> {{ adresse.adresse }}</b>, {{ adresse.cp }}, {{ adresse.ville }} - {{ adresse.pays }}
+                                    <a href="{{ path('livraisonAdresseSuppression', {'id' : adresse.id }) }}"><i class="icon-trash"></i></a>
+                                   <font color="#6495ed"   > <br>{{ adresse.nom }}, {{ adresse.prenom }}</font>
+                                        <br>
+                                  </label>
+                                {% endfor %}
+
+
+                                    <br>
+                                    <h4>Adresse de facturation</h4>
+                                    {% for adresse in utilisateur.adresses %}
+                                        <label class="radio">
+                                            <input type="radio" name="facturation"  value="{{ adresse.id }}" {% if loop.index0 == 0 %} checked="checked" {% endif %}>
+                                            <b> {{ adresse.adresse }}</b>, {{ adresse.cp }}, {{ adresse.ville }} - {{ adresse.pays }}
+                                            <a href="{{ path('livraisonAdresseSuppression', {'id' : adresse.id }) }}"><i class="icon-trash"></i></a>
+                                            <font color="#6495ed"   > <br>{{ adresse.nom }}, {{ adresse.prenom }}</font>
+                                            <br>
+                                        </label>
+                                    {% endfor %}
+
+<br>
+                                <button class="btn btn-info">Valider mes adresses</button>
+                                <a href="{{ path('panier') }}" class="btn btn-warning">Retour</a>
+
+                            </form>
+                            {% endif %}
+                        </div>
+
+
+
+                                    <div class="span4">
+                                        <h4>Ajouter une nouvelle adresse</h4>
+                                        <form action="{{ path('livraison') }}" method="post">
+                                         {{ form_widget(form) }}
+                                            <button class="btn btn-info" type="submit">Ajouter adresse</button>
+                                        </form>
+                                    </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+{% endblock %}

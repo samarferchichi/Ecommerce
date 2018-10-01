@@ -1,0 +1,65 @@
+{% extends "::layout/layout.html.twig" %}
+
+{% block title %} {{ produit.nom}} {% endblock %}
+{% block description %} {{produit.description }}{% endblock %}
+
+{% block body %}
+    <div class="container">
+
+        <div class="row">
+            <div class="span3">
+                {% include '::modulesUser/navigation.html.twig' %}
+
+                {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                    {% include 'UtilisateursBundle:Default:modulesUsed/UtilisateursConnecte.html.twig' %}
+                {% else %}
+                    {% include 'UtilisateursBundle:Default:modulesUsed/Utilisateurs.html.twig' %}
+                {% endif %}
+                {% render(controller('EcommerceBundle:Panier:menu')) %}
+
+
+            </div>
+
+
+            <div class="span9">
+                <div class="row">
+                    <div class="span5">
+                        <img src="{{ asset('uploads/images/products/'~produit.image) }}" alt="Article" width="470" height="310">
+                    </div>
+
+                    <div class="span4">
+                        <h4>{{ produit.nom }}</h4>
+                        <p>{{ produit.categorie.nom }}</p>
+                        <p>{{ produit.description }}</p>
+                        <h4>{{ (produit.tva.multiplicate * produit.prix ) + produit.prix}}DT </h4>
+                        {% if panier[produit.id] is not defined %}
+
+                        <form action="{{ path('ajouter', {'id' : produit.id}) }}"  method="get">
+
+
+                            <select name="qte" class="span1">
+                                {% for i in 1..produit.qte %}
+                                    <option value="{{ i }}">{{ i }}</option>
+
+                                {% endfor %}
+
+                            </select>
+
+                            <div>
+                                <button class="btn btn-primary" >Ajouter au panier</button>
+                            </div>
+                        </form>
+                            {% else %}
+                                <div>
+                                    <a href="{{ path('panier') }}" class="btn btn-primary" >Le produit est deja dans votre panier</a>
+
+                                </div>
+                    {% endif %}
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+{% endblock %}

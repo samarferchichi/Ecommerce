@@ -1,0 +1,22 @@
+<nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+        <ul class="nav navbar-nav">
+            <span class="icon-bar"></span>
+            <li><a href="{{ path('produits') }}">Accueil</a></li>
+            <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Toutes nos catégories<span class="caret"></span></a>
+                <ul class="dropdown-menu">
+                    {% for categories in categories %}
+                    <li>
+                        <a href="{{ path('categorieProduits',{'categorie':categories.id}) }}"><font color="gray" size="1">{{ categories.nom }}</font> </a>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </li>
+
+        </ul>
+
+    </div>
+
+</nav>
+
+

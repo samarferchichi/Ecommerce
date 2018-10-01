@@ -1,0 +1,14 @@
+utilisateurs_homepage:
+    path:     /hello/{name}
+    defaults: { _controller: UtilisateursBundle:Default:index }
+
+
+factures:
+    pattern:  /profile/factures
+    defaults: { _controller: UtilisateursBundle:Utilisateurs:factures }
+
+
+logadmin:
+    pattern: /login/logadmin
+    defaults: { _controller: UtilisateursBundle:Utilisateurs:logadmin }
+

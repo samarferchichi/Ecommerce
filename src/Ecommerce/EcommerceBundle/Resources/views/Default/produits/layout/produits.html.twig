@@ -1,0 +1,68 @@
+{% extends "::layout/layout.html.twig" %}
+
+
+
+{% block body %}
+    <div class="container">
+
+        <div class="row">
+
+            <div class="span3">
+                {% include '::modulesUser/navigation.html.twig' %}
+
+                {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                    {% include 'UtilisateursBundle:Default:modulesUsed/UtilisateursConnecte.html.twig' %}
+                {% else %}
+                {% include 'UtilisateursBundle:Default:modulesUsed/Utilisateurs.html.twig' %}
+                    {% endif %}
+                {% render(controller('EcommerceBundle:Panier:menu')) %}
+
+
+            </div>
+            <div class="span9">
+                {% if produits|length != 0 %}
+            <ul class="thumbnails">
+                {% for p in produits %}
+                     <li class="span3">
+                        <div class="thumbnail">
+                            <div>
+                                <img src="{{ asset('uploads/images/products/'~p.image) }}" width="260" height="150">
+                                <h4> {{ p.nom}}</h4>
+
+                                <h4>{{ (p.tva.multiplicate * p.prix ) + p.prix}}DT</h4>
+
+                                <a class="btn btn-info" href="{{ path('presentation',{'id' : p.id }) }}">Plus d'infos</a>
+                                {% if panier[p.id] is not defined %}
+
+                                <a class="btn btn-warning" href="{{ path('ajouter', { 'id' : p.id }) }}">Ajouter au panier</a>
+                                {% endif %}
+
+                            </div>
+                        </div>
+                    </li>
+                    {% endfor %}
+                </ul>
+
+                <div class="pagination">
+
+
+
+                    <ul>
+                        <li class="disabled"><span>Précédent</span></li>
+                        <li class="disabled"><span>1</span></li>
+                        <li><a href="#">2</a></li>
+                        <li><a href="#">3</a></li>
+                        <li><a href="#">4</a></li>
+                        <li><a href="#">5</a></li>
+                        <li><a href="#">Suivant</a></li>
+                    </ul>
+                </div>
+                {% else %}
+                Aucun produit
+                {% endif %}
+
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

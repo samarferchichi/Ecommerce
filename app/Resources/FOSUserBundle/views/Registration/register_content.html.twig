@@ -1,0 +1,35 @@
+{% trans_default_domain 'FOSUserBundle' %}
+<div class="row">
+        <div class="span3">
+            {% include '::modulesUser/navigation.html.twig' %}
+
+            {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                {% include 'UtilisateursBundle:Default:modulesUsed/UtilisateursConnecte.html.twig' %}
+            {% else %}
+                {% include 'UtilisateursBundle:Default:modulesUsed/Utilisateurs.html.twig' %}
+            {% endif %}
+            {% render(controller('EcommerceBundle:Panier:menu')) %}
+        </div>
+   <center> <h3>Créer un compte   </h3></center>
+        <div id="collapseOne" class="accordion-body collapse in">
+            <div class="accordion-inner">
+
+
+                <div class="span4 offset2">
+
+                        <div class="thumbnail">
+                            <center>
+                    <form action="{{ path('fos_user_registration_register') }}" {{ form_enctype(form) }} method="POST" class="fos_user_registration_register">
+                        {{ form_widget(form) }}
+                        <br />
+                        <input class="btn btn btn-success" type="submit" value="{{ 'registration.submit'|trans }}" />
+
+                    </form></center>
+                        </div>
+                    </li>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

@@ -1,0 +1,63 @@
+{% extends "::layout/layout.html.twig" %}
+
+{% block body %}
+    <div class="container">
+
+        <div class="row">
+            <div class="span3">
+                {% include '::modulesUser/navigation.html.twig' %}
+
+                {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                    {% include 'UtilisateursBundle:Default:modulesUsed/UtilisateursConnecte.html.twig' %}
+                {% else %}
+                    {% include 'UtilisateursBundle:Default:modulesUsed/Utilisateurs.html.twig' %}
+                {% endif %}
+                {% render(controller('EcommerceBundle:Panier:menu')) %}
+
+
+            </div>
+
+
+            <div class="span9">
+                <div class="row">
+
+                 <div class="span4">
+
+                     <div class="span19">
+                         <div class="row">
+                             <h4>Bonjour. Comment pouvons-nous vous aider ? </h4>
+                             <h5> <font color="#4169e1"><a>Options de paiement</a></font> </h5>
+                             <ul>
+                                 <li>
+                                    <a>Ajouter ou modifier un moyen de paiement</a>
+                                 </li>
+                                 <li>
+                                     <a>Modifier une carte de paiement expirée</a>
+
+                                 </li>
+                             </ul>
+                         </div>
+
+                     </div>
+
+                     <div class="span4">
+
+                     <div class="span19">
+                         <div class="row">
+
+
+                     <div class="row">
+                         <h4>Item Brand and Category</h4>
+                         <h5>AB29837 Item Model</h5>
+                         <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+                     </div>
+                        </div>
+                     </div>
+
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+{% endblock %}

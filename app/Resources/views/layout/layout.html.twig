@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <title>{% block title %}Ecommerce {% endblock %}</title>
+		<meta name="keywords" content="{% block motsCles %} {% endblock %}" />
+		<meta name="description" content="{% block description %} {% endblock %}" />
+
+        {% block stylesheets %}{% endblock %}
+
+        <link rel="stylesheet" href="{{  asset('css/bootstrap.css') }}" />
+        <link rel="stylesheet" href="{{  asset('css/bootstrap-responsive.css') }}" />
+        <link rel="stylesheet" href="{{  asset('css/style.css') }}" />
+        <link rel="stylesheet" href="{{  asset('css/font-awesome.css') }}" />
+
+        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+    </head>
+    <body>
+
+
+
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="navbar-inner">
+            <div class="container">
+
+                <a class="brand" href="{{ path('produits') }}">E-commerce</a>
+                <div class="nav-collapse collapse">
+                    {% render(controller('EcommerceBundle:Produits:recherche')) %}
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+        {% block body %}{% endblock %}
+
+	<footer id="footer" class="vspace20">
+		<div class="container">
+			<div class="row"><br>
+				<div class="span4 offset1">
+					<h4>Pour mieux nous connaître</h4>
+					<ul class="nav nav-stacked">
+						<li><a href="{{ path( 'page', { 'id' : 1 }) }}"> À propos</a>
+					</ul>
+				</div>
+
+				<div class="span4">
+					<h4>Notre entrepôt</h4>
+					<p><i class="icon-map-marker"></i>&nbsp;Licht und schatten</p>
+				</div>
+
+				<div class="span2">
+					<h4>Nous contacter</h4>
+					<p><i class="icon-phone"></i>&nbsp;Tel: 28 197 769</p>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="span4">
+					<p>&copy; Copyright {{ "now"|date('Y') }} - FERCHICHI Samar</p>
+				</div>
+			</div>
+		</div>
+	</footer>
+	<script src="{{ asset('js/jquery-1.10.0.min.js')}} "></script>
+	<script src="{{ asset('js/bootstrap.js') }}"></script>
+	        {% block javascripts %}{% endblock %}
+
+</body>
+</html>

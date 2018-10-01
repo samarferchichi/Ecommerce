@@ -1,0 +1,45 @@
+{% extends "FOSUserBundle::layout.html.twig" %}
+
+{% trans_default_domain 'FOSUserBundle' %}
+
+{% block fos_user_content %}
+
+    <div class="row">
+        <div class="span12">
+            <h2>Connexion</h2>
+            <div id="collapseOne" class="accordion-body collapse in">
+                <div class="accordion-inner">
+
+
+                    <div class="span4 offset2">
+                        <h4></h4>
+
+                        <form action="{{ path('logadmin') }}" method="post">
+
+                            <label for="username">Nom </label>
+                            <input type="text" id="username" name="nom" required="required" />
+
+                            <label for="password">password</label>
+                            <input  type="password" id="password" name="pass" required="required" />
+                            <br>
+
+                            {% if is_granted('ROLE_SUPER_ADMIN') %}
+                                {% include 'UtilisateursBundle:Default:modulesUsed/panier.html.twig' %}
+                                {% else %}
+                                <p>jhkb</p>
+                            {% endif %}
+                            <input class="btn btn-primary" type="submit" id="_submit" name="_submit"  value="{{ 'security.login.submit'|trans }}">
+
+
+                        </form>
+
+                    </div>
+                    <div class="span10">
+                        <a href="{{ path('fos_user_resetting_request') }}">Mot de passe perdu ?</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock fos_user_content %}

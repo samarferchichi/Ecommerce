@@ -1,0 +1,80 @@
+{% extends "FOSUserBundle::layout.html.twig" %}
+
+{% trans_default_domain 'FOSUserBundle' %}
+
+{% block fos_user_content %}
+{% if error %}
+    <div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+{% endif %}
+
+    <div class="row">
+
+        <div class="span12">
+            <div class="span3">
+                {% include '::modulesUser/navigation.html.twig' %}
+
+                {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                    {% include 'UtilisateursBundle:Default:modulesUsed/UtilisateursConnecte.html.twig' %}
+                {% else %}
+                    {% include 'UtilisateursBundle:Default:modulesUsed/Utilisateurs.html.twig' %}
+                {% endif %}
+                {% render(controller('EcommerceBundle:Panier:menu')) %}
+            </div>
+
+            <center><h3>Identifiez-vous</h3></center>
+
+
+
+
+
+
+
+            <div id="collapseOne" class="accordion-body collapse in">
+                <div class="accordion-inner">
+
+                    <div class="span4 offset2">
+                            <li class="thumbnail">
+                                <div>
+                        <center>
+                            <form action="{{ path("fos_user_security_check") }}" method="post">
+                            <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
+
+                            <label for="username">{{ 'security.login.username'|trans }}</label>
+                            <input type="text" id="username" name="_username" value="{{ last_username }}" required="required" />
+                            <label for="password">{{ 'security.login.password'|trans }}</label>
+                            <input  type="password" id="password" name="_password" required="required" />
+                            <br>
+                            <input class="btn btn-success" type="submit" id="_submit" name="_submit" value="{{ 'security.login.submit'|trans }}" />
+                                <br>
+                                <a href="{{ path('fos_user_resetting_request') }}">Mot de passe perdu ?</a>
+
+                                <br><br><center><a href="{{path('logadmin')}}"  name="ss"><font size="2">Connecter tant qu'administrateur</font> </a></center>
+                        </form></center>
+
+
+
+
+
+
+                                </div>
+                        </li>
+
+                    </div>
+
+                            <div class="span4">
+                                <h4>Nouveau chez nos ?</h4>
+                                <em>
+                                    nous vous invitons à vous inscrire<br />
+                                    afin de passer votre commande et de manger équilibré.
+                                </em>
+                                <br /><br />
+                                <a href="{{ path('fos_user_registration_register') }}" class="btn btn-info">Créer votre compte</a>
+
+                            </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock fos_user_content %}

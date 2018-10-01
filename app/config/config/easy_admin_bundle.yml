@@ -1,0 +1,15 @@
+easy_admin:
+  entities:
+    Produits:
+      # ...
+      list:
+        fields:
+        - { property: 'image', template: '%app.path.product_images%'  }
+      # ...
+      show:
+        fields:
+        - { property: 'image', type: 'image', base_path: '%app.path.product_images%' }
+
+      form:
+        fields:
+        - { property: 'imageFile', type: 'file' }
